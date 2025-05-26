@@ -56,27 +56,22 @@ const location=path.join(__dirname,"./public"); //here we are jioning the public
 app.use(express.static(location)); //here now we can acess the static files like images etc
 app.set('view engine',"hbs"); //here we are going to use the hbs engine,when you see the browser,the hbs engine will run
 
+//create this variable for creating a design like master page where common things will get placed in one part
+const partialsPath=path.join(__dirname,"./views/partials");
+hbs.registerPartials(partialsPath);
 
 
-//specify the routing here
-//redirecting to home page
-//sending a request and reciveing the response
-//here give the paths inside the index.hbs template and in registration.hbs
-app.get("/",(req,res)=>{
-//res.send("<h1>Hello Welcome to redisolve</h1>");
-res.render('index'); //rendering the templates in the index.hbs instead of the manual one
-}) ;
 
-app.get("/registeration",(req,res)=>{
-//res.send("<h1>Hello Welcome to redisolve</h1>");
-res.render("registeration"); //rendering the templates in the index.hbs instead of the manual one
-}) ;
+//here all the routes i have givn here moved to the pages.js separately
+ app.use('/',require('./routes/pages'))
 
-app.get("/profile",(req,res)=>{
-//res.send("<h1>Hello Welcome to redisolve</h1>");
-res.render("profile"); //rendering the templates in the index.hbs instead of the manual one
-}) ;
 
+ // Add these lines - middlewares for sending the request format of the form
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+
+  app.use('/auth',require('./routes/auth'))
 
 
 

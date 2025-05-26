@@ -14,20 +14,26 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <!-- Top Navigation Bar -->
-  <div class="navbar">
-    <div class="logo">MyApp</div>
-    <div class="menu">
-      <a href="/profile">Home</a>
-      <a href="/">Profile</a>
-    </div>
-  </div>
+   
+
+   {{!-- calling the navbar --}}
+   {{>navbar }} 
+
 
   <!-- Login Form Centered -->
   <div class="login-container">
     <div class="login-box">
       <h2>Login</h2>
-      <form action="/" method="POST">.
+
+      
+{{!-- it is like ngif in the angular --}}
+  {{#if msg}}
+  <div class="alert {{msg_type}}">
+    {{msg}}
+  </div>
+{{/if}}
+
+      <form action="/auth/index" method="POST">
 
 
         <input type="email" name="email" placeholder="Username" required>
