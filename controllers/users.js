@@ -17,6 +17,7 @@ const db=mysql.createConnection({
 
 
     // controllers/login.js ------------ here use the same name as that of the name given in the auth.js
+    //it is used for logging in the details
     exports.index1 = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -47,7 +48,8 @@ const db=mysql.createConnection({
       }
 
       // Check password
-      const isMatch = await bcrypt.compare(password, result[0].pass);
+     // If a user is found, compare the plaintext password from the form with the hashed password stored in the database (result[0].PASS).
+      const isMatch = await bcrypt.compare(password, result[0].PASS)
       if (!isMatch) {
         return res.status(401).render('index', {
           msg: "Email or password incorrect",
